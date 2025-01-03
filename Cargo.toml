@@ -1,5 +1,5 @@
 [package]
-name = "torn-api"
+name = "torn_api"
 version = "0.1.0"
 edition = "2021"
 authors = ["@Echo_2G <caldwellysr@gmail.com>", "@Grunk <grunk@grunk.xyz>"]
