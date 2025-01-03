@@ -17,8 +17,6 @@ fn main() {
 
     let args = Args::parse();
 
-    println!("TORN_API_KEY env var = {0:?}", config.api_key);
-
     if args.command == "user" {
         let json = self::call_user_endpoint(config);
         println!("{:#?}", json);
