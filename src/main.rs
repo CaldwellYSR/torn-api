@@ -1,4 +1,6 @@
-use torn_api::config::Config;
+use config::Config;
+
+pub mod config;
 
 fn main() {
     let config = Config::new();
