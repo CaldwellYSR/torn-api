@@ -1,11 +1,10 @@
 use clap::Parser;
 use config::Config;
-use reqwest::blocking::Client;
-use reqwest::header::ACCEPT;
-use reqwest::Url;
 use serde_json::Value;
+use torn_api::ApiClient;
 
 pub mod config;
+pub mod torn_api;
 
 #[derive(Parser)]
 struct Args {
@@ -24,20 +23,6 @@ fn main() {
 }
 
 fn call_user_endpoint(config: Config) -> Value {
-    let url = "https://api.torn.com/v2/user";
-    let params = [("key", config.api_key)];
-    let url = Url::parse_with_params(url, &params).expect("Failed to build URL");
-
-    let client = Client::new();
-    let request = client.get(url).header(ACCEPT, "application/json");
-
-    let response = request.send();
-    let body = response
-        .expect("No response from API")
-        .text()
-        .expect("API response not a string");
-
-    let json: Value = serde_json::from_str(&body).expect("Poorly formed JSON");
-
-    return json;
+    let client = ApiClient::new(config);
+    return client.get_user();
 }
